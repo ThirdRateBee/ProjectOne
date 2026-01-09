@@ -4,9 +4,15 @@
 
 int Room = 1;
 
+int Wins = 0;
+
 int PlayerHealth = 100;
 int PlayerDamage = Random.Shared.Next(1, 15);
 int PlayerCoins = 0;
+
+int MonsterDamage;
+int MonsterHealth;
+
 
 while (Room != 0)
 {
@@ -33,25 +39,20 @@ while (Room != 0)
     {
 
 
-        int MonsterDamage = ListDamage[n];
-        int MonsterHealth = ListHP[n];
-
-        int Wins = 0;
+        MonsterDamage = ListDamage[n];
+        MonsterHealth = ListHP[n];
 
         String Action = "";
         Action = Action.ToLower();
         
         Console.WriteLine($"Your are fighting {MType[n]}");
+        Console.WriteLine($"-----------------");
+        Console.WriteLine($"you have {PlayerHealth} health");
+        Console.WriteLine($"They have {MonsterHealth} health");
+        Console.WriteLine($"-----------------");
 
         while (Wins != Wins+1)
         {
-            
-            
-            Console.WriteLine($"-----------------");
-            Console.WriteLine($"you have {PlayerHealth} health");
-            Console.WriteLine($"They have {MonsterHealth} health");
-            Console.WriteLine($"-----------------");
-
             
             Action = Console.ReadLine();
             Action = Action.ToLower();
@@ -64,12 +65,29 @@ while (Room != 0)
                 PlayerHealth -= MonsterDamage;
                 Console.WriteLine($"They did {MonsterDamage} damage");
                 Console.WriteLine($"-----------------");
+                Console.WriteLine($"you have {PlayerHealth} health");
+                Console.WriteLine($"They have {MonsterHealth} health");
+                Console.WriteLine($"-----------------");
+
+            }
+            else
+            {
+                Console.WriteLine("Press A to Fight");
+            }
+
+
+            if (PlayerHealth <= 0)
+            {
+                Room = 0;
+                break;
+                // BreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreak
             }
 
 
             if (MonsterHealth <= 0)
             {
                 PlayerCoins += 10;
+                Wins += 1;
 
                 Console.WriteLine($"You killed it!");
                 Console.WriteLine($"-----------------");
@@ -79,7 +97,6 @@ while (Room != 0)
                 
                 if (Action == "e")
                 {
-                    Wins += 1;
                     
                     if (Action == "e")
                     {
@@ -93,22 +110,27 @@ while (Room != 0)
                         Action = Console.ReadLine();
                         Action = Action.ToLower();
 
+                        if (Action == "a")
+                        {
+                            PlayerHealth += 10;
+                        }
+                        else if (Action == "b")
+                        {
+                            PlayerDamage += 5;
+                        }
+
+
 
                     }
                 }
-
-                else if (Action == "a")
+                else
                 {
-                    Wins += 1;
+                    Console.WriteLine("Press A to Fight");
+                    Console.WriteLine("Press E to Shop");
                 }
             }
 
-            if (PlayerHealth <= 0)
-            {
-                Room = 0;
-                break;
-                // BreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreakBreak
-            }
+
 
 
         
